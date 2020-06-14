@@ -1,10 +1,13 @@
 import os
 import random
+import time
 import data as d
 import lyrics as l
 
 import discord
 import gspread
+import datetime as dt
+from datetime import datetime
 from dotenv import load_dotenv
 from discord.ext import commands
 from oauth2client.service_account import ServiceAccountCredentials
@@ -125,34 +128,59 @@ info = sh.sheet1.get('A1:B2')
 async def on_ready():
     print(bot.user.name, "has connected to Discord!")
 
-@bot.command(aliases = ["ye leak"], help = "Gives a list of dates from Kanye leaks", category = "Leaks")
-async def ye_leak(ctx):
+@bot.command(help = "Kanye Leaks from pre-College Dropout to Jesus is King 2", category = "Leaks")
+async def leak(ctx, *, location):
+
+    era = "**"+str(sh.sheet1.acell('A1').value)+"**"
+    era_value = str(sh.sheet1.acell('A' + location).value)
+    names = "**"+str(sh.sheet1.acell('B1').value)+"**"
+    names_value = str(sh.sheet1.acell('B' + location).value)
+    notes = "**"+str(sh.sheet1.acell('C1').value)+"**"
+    notes_value = str(sh.sheet1.acell('C' + location).value)
+    leak_date = "**" + str(sh.sheet1.acell('D1').value + "**")
+    leak_date_value = "No data available" if str(sh.sheet1.acell('D' + location).value) == "" else str(sh.sheet1.acell('D' + location).value)
+    type = "**"+str(sh.sheet1.acell('E1').value)+"**"
+    type_value = str(sh.sheet1.acell('E' + location).value)
+    link = "**"+str(sh.sheet1.acell('H1').value)+"**"
+    link_value = str(sh.sheet1.acell('H' + location).value)
+
     embed = discord.Embed(
-        colour = 0x000000
+        colour = 0xCFB997,
+        timestamp = datetime.today() + dt.timedelta(hours = 7)
+    )
+    embed.set_thumbnail(
+    url = ""
     )
     embed.set_author(
-        name = 'User: {author}'.format(author = ctx.author),
-        icon_url = ""
+        name = 'user: {author}'.format(author = ctx.author),
+        icon_url = str(ctx.author.avatar_url)
     )
     embed.add_field( #era
-    name = "**"+str(sh.sheet1.acell('A1').value)+"**",
-    value = str(sh.sheet1.acell('A244').value),
+        name = era ,
+        value = era_value
     )
     embed.add_field( #name
-    name = "**"+str(sh.sheet1.acell('B1').value)+"**",
-    value = str(sh.sheet1.acell('B244').value),
-    inline = True
+        name = names,
+        value = names_value
+    )
+    embed.add_field( #notes
+        name = notes,
+        value = notes_value,
+        inline = False
     )
     embed.add_field( #leak date
-    name = "**" + str(sh.sheet1.acell('D1').value + "**"),
-    value = "No data available", #str(sh.sheet1.acell('D244').value),
-    inline = False
+        name = leak_date,
+        value = leak_date_value
+    )
+    embed.add_field( #type
+        name = type,
+        value = type_value
     )
     embed.add_field( #link
-    name = "**"+str(sh.sheet1.acell('H1').value)+"**",
-    value = str(sh.sheet1.acell('H244').value),
-    inline = False
-)
+        name = link ,
+        value = link_value,
+        inline = False
+    )
     await ctx.send(embed=embed)
 
 bot.run(TOKEN)
