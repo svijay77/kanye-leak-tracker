@@ -144,12 +144,55 @@ async def leak(ctx, *, location):
     link = "**"+str(sh.sheet1.acell('H1').value)+"**"
     link_value = str(sh.sheet1.acell('H' + location).value)
 
+    album_cover = ""
+
+    if era_value == "Before College Dropout":
+        album_cover = "https://cdn.discordapp.com/attachments/715392517448663093/721852588550783062/image0.jpg"
+    elif era_value == "College Dropout":
+        album_cover = "https://cdn.discordapp.com/attachments/715392517448663093/721852588777013328/image1.jpg"
+    elif era_value == "Late Registration":
+        album_cover = "https://cdn.discordapp.com/attachments/715392517448663093/721852588970082375/image2.jpg"
+    elif era_value == "Graduation":
+        album_cover = "https://cdn.discordapp.com/attachments/715392517448663093/721852589209026590/image3.jpg"
+    elif era_value == "808s & Heartbreak":
+        album_cover = "https://cdn.discordapp.com/attachments/715392517448663093/721852589435519046/image4.jpg"
+    elif era_value == "MBDTF":
+        album_cover = "https://cdn.discordapp.com/attachments/715392517448663093/721852589641302066/image5.jpg"
+    elif era_value == "Watch The Throne":
+        album_cover = "https://cdn.discordapp.com/attachments/715392517448663093/721852589808812102/image6.jpg"
+    elif era_value == "Cruel Summer":
+        album_cover = "https://cdn.discordapp.com/attachments/715392517448663093/721852590073053205/image7.jpg"
+    elif era_value == "Yeezus":
+        album_cover = "https://cdn.discordapp.com/attachments/715392517448663093/721852590345945088/image8.png"
+    elif era_value == "So Help Me God":
+        album_cover = "https://cdn.discordapp.com/attachments/715392517448663093/721852590601666630/image9.jpg"
+    elif era_value == "The Life Of Pablo":
+        album_cover = "https://cdn.discordapp.com/attachments/715392517448663093/721852640522272898/image0.jpg"
+    elif era_value == "Cruel Winter":
+        album_cover = "https://cdn.discordapp.com/attachments/715392517448663093/721852640748896276/image1.jpg"
+    elif era_value == "TurboGrafx16":
+        album_cover = "https://cdn.discordapp.com/attachments/715392517448663093/721852641059143680/image2.png"
+    elif era_value == "ye":
+        album_cover = "https://cdn.discordapp.com/attachments/715392517448663093/721852642011119616/image4.jpg"
+    elif era_value == "Kids See Ghosts":
+        album_cover = "https://cdn.discordapp.com/attachments/715392517448663093/721852642237612032/image5.jpg"
+    elif era_value == "Good Ass Job":
+        album_cover = "https://cdn.discordapp.com/attachments/715392517448663093/721852641713455174/image3.jpg"
+    elif era_value == "Yandhi":
+        album_cover = "https://cdn.discordapp.com/attachments/715392517448663093/721913067650416710/yandhi.jpg"
+    elif era_value == "Jesus Is King":
+        album_cover = "https://cdn.discordapp.com/attachments/715392517448663093/721852642489401825/image6.jpg"
+    else:
+        album_cover = "https://cdn.discordapp.com/attachments/715392517448663093/721852642665431090/image7.jpg"
+
+
     embed = discord.Embed(
+        title = "Kanye West Leak",
         colour = 0xCFB997,
         timestamp = datetime.today() + dt.timedelta(hours = 7)
     )
     embed.set_thumbnail(
-    url = ""
+    url = album_cover
     )
     embed.set_author(
         name = 'user: {author}'.format(author = ctx.author),
@@ -181,6 +224,7 @@ async def leak(ctx, *, location):
         value = link_value,
         inline = False
     )
+    print(len(embed))
     await ctx.send(embed=embed)
 
 bot.run(TOKEN)
