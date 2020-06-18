@@ -1,7 +1,8 @@
 import random
 import data as d
 import lyrics_list as l
-
+import datetime as dt
+from datetime import datetime
 import discord
 from discord.ext import commands
 
@@ -10,17 +11,14 @@ class Lyrics(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.Cog.listener()
-    async def on_ready():
-        print("{botname} has connected to Discord!".format(bot.user))
-
     @commands.command(help = 'Responds with a random Kanye lyric')
     async def ye(self, ctx):
         response = random.choice(l.kanye_west_lyrics)
         embed = discord.Embed(
             color= 0xCFB997,
             title = "Kanye West Lyric",
-            description = response
+            description = response,
+            timestamp = datetime.today() + dt.timedelta(hours = 7)
         )
         await ctx.send(embed = embed)
 
@@ -30,7 +28,8 @@ class Lyrics(commands.Cog):
         embed = discord.Embed(
             color= 0x1445cc,
             title = "Drake Lyric",
-            description = drakeLyric
+            description = drakeLyric,
+            timestamp = datetime.today() + dt.timedelta(hours = 7)
         )
         await ctx.send(embed=embed)
 
@@ -40,7 +39,8 @@ class Lyrics(commands.Cog):
         embed = discord.Embed(
             color= 0xe35a24,
             title = "Lil Wayne Lyric",
-            description = lWLyric
+            description = lWLyric,
+            timestamp = datetime.today() + dt.timedelta(hours = 7)
         )
         await ctx.channel.send(embed=embed)
 
@@ -50,7 +50,8 @@ class Lyrics(commands.Cog):
         embed = discord.Embed(
             color= 0x000000,
             title = "A$AP Rocky Lyric",
-            description = rockyLyric
+            description = rockyLyric,
+            timestamp = datetime.today() + dt.timedelta(hours = 7)
         )
         await ctx.channel.send(embed=embed)
 
@@ -60,7 +61,8 @@ class Lyrics(commands.Cog):
         embed = discord.Embed(
             color= 0x0ee844,
             title = "Childish Gambino Lyric",
-            description = gambinoLyric
+            description = gambinoLyric,
+            timestamp = datetime.today() + dt.timedelta(hours = 7)
         )
         await ctx.channel.send(embed=embed)
 
@@ -70,7 +72,8 @@ class Lyrics(commands.Cog):
         embed = discord.Embed(
             color= 0xecf026,
             title = "Kid Cudi Lyric",
-            description = cudiLyric
+            description = cudiLyric,
+            timestamp = datetime.today() + dt.timedelta(hours = 7)
         )
         await ctx.channel.send(embed=embed)
 
@@ -80,7 +83,8 @@ class Lyrics(commands.Cog):
         embed = discord.Embed(
             color= 0x781fcc,
             title = "Frank Ocean Lyric",
-            description = frankLyric
+            description = frankLyric,
+            timestamp = datetime.today() + dt.timedelta(hours = 7)
         )
         await ctx.channel.send(embed=embed)
 
@@ -90,21 +94,16 @@ class Lyrics(commands.Cog):
         embed = discord.Embed(
             color= 0xff00ea,
             title = "Doja Trash Lyric",
-            description = trashLyric
+            description = trashLyric,
+            timestamp = datetime.today() + dt.timedelta(hours = 7)
         )
         await ctx.channel.send(embed=embed)
 
     @commands.command(help = "kills the bot :(")
     async def death(self, ctx):
-        embed = discord.Embed(
-            color= 0x59ffee,
-            title = "bye meanie :(",
-        )
-        if True:
-            await ctx.send(embed=embed)
+        await ctx.send("bye meanie :(" if ctx.author.name == "akniight" else "u aren't cool enough to shut me down :)")
+        if ctx.author.name == "akniight":
             await ctx.bot.logout()
-        else:
-            return
 
 def setup(bot):
     bot.add_cog(Lyrics(bot))
