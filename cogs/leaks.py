@@ -128,7 +128,7 @@ class Leaks(commands.Cog):
 
     @commands.command(help = "Kanye Leaks from pre-College Dropout to Jesus is King 2... \n\n2-15: Before College Dropout \n16-40: College Dropout \n41-54: Late Registration \n55-75: Graduation \n76-94: 808s & Heartbreak \n95-130: MBDTF \n131-138: Watch the Throne \n139-149: Cruel Summer \n150-181: Yeezus \n182-226: So Help Me God \n227-308: The Life of Pablo \n309-316: Cruel Winter \n317-341: TurboGrafx16 \n342-372: ye \n373-379: Kids See Ghosts \n380-383: Good Ass Job \n384-455: Yandhi \n456-482: Jesus is King \n483-489: Jesus Is King II")
 
-    async def yeleak(self, ctx, location):
+    async def kanyeleaks(self, ctx, location):
 
         era = "**"+str(sheet.acell('A1').value)+"**"
         era_value = str(sheet.acell('A' + location).value)
