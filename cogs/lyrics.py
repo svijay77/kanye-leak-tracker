@@ -12,7 +12,7 @@ class Lyrics(commands.Cog):
         self.bot = bot
 
     @commands.command(help = 'Responds with a random Kanye lyric')
-    async def ye(self, ctx):
+    async def kanye(self, ctx):
         response = random.choice(l.kanye_west_lyrics)
         embed = discord.Embed(
             color= 0xCFB997,
