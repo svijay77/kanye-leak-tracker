@@ -15,51 +15,34 @@ Client = gspread.service_account(filename = 'D:\pythonProjects\discordBot/client
 sh = Client.open("Copy of Kanye Unreleased Tracker")
 sheet = sh.sheet1
 
-def albumPicker(album):
-    album_cover = ""
+album_pics = {"Before College Dropout": "https://cdn.discordapp.com/attachments/715392517448663093/721852588550783062/image0.jpg",
+                "College Dropout": "https://cdn.discordapp.com/attachments/715392517448663093/721852588777013328/image1.jpg",
+                "Late Registration": "https://cdn.discordapp.com/attachments/715392517448663093/721852588970082375/image2.jpg",
+                "Graduation": "https://cdn.discordapp.com/attachments/715392517448663093/721852589209026590/image3.jpg",
+                "808s & Heartbreak": "https://cdn.discordapp.com/attachments/715392517448663093/721852589435519046/image4.jpg",
+                "MBDTF": "https://cdn.discordapp.com/attachments/715392517448663093/721852589641302066/image5.jpg",
+                "Watch The Throne": "https://cdn.discordapp.com/attachments/715392517448663093/721852589808812102/image6.jpg",
+                "Cruel Summer": "https://cdn.discordapp.com/attachments/715392517448663093/721852590073053205/image7.jpg",
+                "Yeezus": "https://cdn.discordapp.com/attachments/715392517448663093/721852590345945088/image8.png",
+                "So Help Me God": "https://cdn.discordapp.com/attachments/715392517448663093/721852590601666630/image9.jpg",
+                "The Life Of Pablo": "https://cdn.discordapp.com/attachments/715392517448663093/721852640522272898/image0.jpg",
+                "Cruel Winter": "https://cdn.discordapp.com/attachments/715392517448663093/721852640748896276/image1.jpg",
+                "TurboGrafx16": "https://cdn.discordapp.com/attachments/715392517448663093/721852641059143680/image2.png",
+                "ye": "https://cdn.discordapp.com/attachments/715392517448663093/721852642011119616/image4.jpg",
+                "Kids See Ghosts": "https://cdn.discordapp.com/attachments/715392517448663093/721852642237612032/image5.jpg",
+                 "Good Ass Job": "https://cdn.discordapp.com/attachments/715392517448663093/721852641713455174/image3.jpg",
+                 "Yandhi": "https://cdn.discordapp.com/attachments/715392517448663093/721913067650416710/yandhi.jpg",
+                 "Jesus Is King": "https://cdn.discordapp.com/attachments/715392517448663093/721852642489401825/image6.jpg",
+                 "Jesus Is King II": "https://cdn.discordapp.com/attachments/715392517448663093/721852642665431090/image7.jpg"}
 
-    if album == "Before College Dropout":
-        album_cover = "https://cdn.discordapp.com/attachments/715392517448663093/721852588550783062/image0.jpg"
-    elif album == "College Dropout":
-        album_cover = "https://cdn.discordapp.com/attachments/715392517448663093/721852588777013328/image1.jpg"
-    elif album == "Late Registration":
-        album_cover = "https://cdn.discordapp.com/attachments/715392517448663093/721852588970082375/image2.jpg"
-    elif album == "Graduation":
-        album_cover = "https://cdn.discordapp.com/attachments/715392517448663093/721852589209026590/image3.jpg"
-    elif album == "808s & Heartbreak":
-        album_cover = "https://cdn.discordapp.com/attachments/715392517448663093/721852589435519046/image4.jpg"
-    elif album == "MBDTF":
-        album_cover = "https://cdn.discordapp.com/attachments/715392517448663093/721852589641302066/image5.jpg"
-    elif album == "Watch The Throne":
-        album_cover = "https://cdn.discordapp.com/attachments/715392517448663093/721852589808812102/image6.jpg"
-    elif album == "Cruel Summer":
-        album_cover = "https://cdn.discordapp.com/attachments/715392517448663093/721852590073053205/image7.jpg"
-    elif album == "Yeezus":
-        album_cover = "https://cdn.discordapp.com/attachments/715392517448663093/721852590345945088/image8.png"
-    elif album == "So Help Me God":
-        album_cover = "https://cdn.discordapp.com/attachments/715392517448663093/721852590601666630/image9.jpg"
-    elif album == "The Life Of Pablo":
-        album_cover = "https://cdn.discordapp.com/attachments/715392517448663093/721852640522272898/image0.jpg"
-    elif album == "Cruel Winter":
-        album_cover = "https://cdn.discordapp.com/attachments/715392517448663093/721852640748896276/image1.jpg"
-    elif album == "TurboGrafx16":
-        album_cover = "https://cdn.discordapp.com/attachments/715392517448663093/721852641059143680/image2.png"
-    elif album == "ye":
-        album_cover = "https://cdn.discordapp.com/attachments/715392517448663093/721852642011119616/image4.jpg"
-    elif album == "Kids See Ghosts":
-        album_cover = "https://cdn.discordapp.com/attachments/715392517448663093/721852642237612032/image5.jpg"
-    elif album == "Good Ass Job":
-        album_cover = "https://cdn.discordapp.com/attachments/715392517448663093/721852641713455174/image3.jpg"
-    elif album == "Yandhi":
-        album_cover = "https://cdn.discordapp.com/attachments/715392517448663093/721913067650416710/yandhi.jpg"
-    elif album == "Jesus Is King":
-        album_cover = "https://cdn.discordapp.com/attachments/715392517448663093/721852642489401825/image6.jpg"
-    elif album == "Jesus Is King II":
-        album_cover = "https://cdn.discordapp.com/attachments/715392517448663093/721852642665431090/image7.jpg"
-    else:
-        pass
 
-    return album_cover
+def albumPicker(album, album_covers):
+    album_picture = ""
+
+    for name in album_covers:
+        if name == album:
+            album_picture = album_covers[name]
+            return album_picture
 
 class Leaks(commands.Cog):
 
@@ -92,7 +75,7 @@ class Leaks(commands.Cog):
             timestamp = datetime.today() + dt.timedelta(hours = 7)
         )
         embed.set_thumbnail(
-        url = albumPicker(era_value)
+        url = albumPicker(era_value, album_pics)
         )
         embed.set_author(
             name = 'user: {author}'.format(author = ctx.author),
@@ -143,15 +126,13 @@ class Leaks(commands.Cog):
         link = "**"+str(sheet.acell('H1').value)+"**"
         link_value = "No link available" if str(sheet.acell('H' + location).value) == "" else str(sheet.acell('H' + location).value)
 
-        album_cover = albumPicker(era_value)
-
         embed = discord.Embed(
             title = "Kanye West Leak",
             colour = 0xCFB997,
             timestamp = datetime.today() + dt.timedelta(hours = 7)
         )
         embed.set_thumbnail(
-        url = album_cover
+        url = albumPicker(era_value, album_pics)
         )
         embed.set_author(
             name = 'user: {author}'.format(author = ctx.author),
